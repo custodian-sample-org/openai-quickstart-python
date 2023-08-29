@@ -3,6 +3,6 @@ language python
 pattern use_dot_env() {
   `os.getenv` where {
     $module = `dotenv`,
-    $module <: ensure_import()
+    $module <: ensure_imported()
   }
 }
