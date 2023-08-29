@@ -7,3 +7,5 @@ pattern use_dot_env() {
     // $module <: ensure_import()
   }
 }
+
+use_dot_env()
