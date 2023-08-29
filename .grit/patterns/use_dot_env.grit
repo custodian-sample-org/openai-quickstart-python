@@ -1,8 +1,9 @@
 language python
 
 pattern use_dot_env() {
-  `os.getenv` where {
+  `os.getenv` => `dotenv.stuff` where {
     $module = `dotenv`,
-    $module <: ensure_import()
+    // TODO: fix importing
+    // $module <: ensure_import()
   }
 }
