@@ -1,0 +1,5 @@
+language python
+
+pattern use_dot_env() {
+  statement() as $s where $s <: contains `os.getenv`
+}
