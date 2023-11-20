@@ -1,22 +1,24 @@
 import os
 
 import openai
+from openai import OpenAI
+
+client = OpenAI(api_key=os.getenv("OPENAI_API_KEY"))
 from flask import Flask, redirect, render_template, request, url_for
 
 app = Flask(__name__)
-openai.api_key = os.getenv("OPENAI_API_KEY")
-openai.something = "Hi"
+
+# TODO: The 'openai.something' option isn't read in the client API. You will need to pass it when you instantiate the client, e.g. 'OpenAI(something="Hi")'
+# openai.something = "Hi"
 
 
 @app.route("/", methods=("GET", "POST"))
 def index():
     if request.method == "POST":
         animal = request.form["animal"]
-        response = openai.Completion.create(
-            model="text-davinci-003",
-            prompt=generate_prompt(animal),
-            temperature=0.6,
-        )
+        response = client.completions.create(model="text-davinci-003",
+        prompt=generate_prompt(animal),
+        temperature=0.6)
         return redirect(url_for("index", result=response.choices[0].text))
 
     result = request.args.get("result")
